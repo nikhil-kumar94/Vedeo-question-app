@@ -53,6 +53,6 @@ def get_video_info(url,question,key):
         print("Try updating pytube or check the video URL.")
 
 
-    res = get_response(docs,question)
+    res = get_response(docs,question,key)
     return res
 

@@ -11,7 +11,7 @@ st.write("Enter a video URL to retrieve its information.")
 # Input box for the video URL
 video_url = st.text_input("Video URL", max_chars=100, placeholder="Enter the video link here")
 question = st.text_input("Question", max_chars=100, placeholder="Enter the Question here")
-api_key = st.text_input("Key", max_chars=100, placeholder="Enter the Key here")
+api_key = st.text_input("Key", max_chars=1000, placeholder="Enter the Key here",type = 'password')
 # Submit button to trigger the action
 if st.button("Get Info"):
     if video_url:
