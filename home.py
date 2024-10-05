@@ -1,5 +1,9 @@
 import streamlit as st
 from opeai import get_video_info
+from streamlit_TTS import auto_play, text_to_speech, text_to_audio
+
+from gtts.lang import tts_langs
+langs=tts_langs().keys()
 
 # Set up the page layout and title
 st.set_page_config(page_title="Video Info", layout="centered")
@@ -18,10 +22,11 @@ if st.button("Get Info"):
         try:
             res = get_video_info(video_url, question,api_key)
             st.write(f"Here is the info :- \n{res}")
+            text_to_speech(text=res, language='en')
             # Here, you would add the code to get the video info using an API or other method
         except Exception as e:
-            print(e)
-            st.write("Some error occured")
+            # print(e)
+            st.write(f"Some error occured :- {e}")
     else:
         st.warning("Please enter a valid video URL.")
 

@@ -31,26 +31,20 @@ def get_response(docs,question,SECRET_KEY):
         )
     ]
     ai_msg = llm.invoke(messages)
-    print(ai_msg.content)
     return ai_msg.content
 
 
 
 def get_video_info(url,question,key):
-    try:
-        loader = YoutubeLoader.from_youtube_url(
-            url,
-            add_video_info=True,
-            transcript_format=TranscriptFormat.CHUNKS,
-    chunk_size_seconds=30,
-        )
-        doc = loader.load()
-        text_splitter = CharacterTextSplitter(chunk_size=1500, chunk_overlap=4)
-        docs = text_splitter.split_documents(doc)
-     
-    except PytubeError as e:
-        print(f"Error fetching video info: {str(e)}")
-        print("Try updating pytube or check the video URL.")
+    loader = YoutubeLoader.from_youtube_url(
+        url,
+        add_video_info=True,
+        transcript_format=TranscriptFormat.CHUNKS,
+chunk_size_seconds=30,
+    )
+    doc = loader.load()
+    text_splitter = CharacterTextSplitter(chunk_size=1500, chunk_overlap=4)
+    docs = text_splitter.split_documents(doc)
 
 
     res = get_response(docs,question,key)
